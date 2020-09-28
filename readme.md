@@ -56,3 +56,9 @@ DATABASES = {
 docker-compose build
 docker-compose up
 ```
+
+## Apply migrations
+
+```sh
+docker exec server python manage.py migrate
+```
