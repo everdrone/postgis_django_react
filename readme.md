@@ -45,3 +45,10 @@ npx create-react-app ./webapp
 # write dockerfile
 echo $WEBAPP_DOCKERFILE > webapp/Dockerfile
 ```
+
+### Build
+
+```sh
+docker-compose build
+docker-compose up
+```
