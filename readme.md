@@ -1,52 +1,56 @@
 # PostgreSQL + Django + React
 
-### Django Initialization
+## Initialize boilerplate
 
 ```sh
-# save dockerfile contents
-SERVER_DOCKERFILE=$(cat server/Dockerfile)
-
-# start clean
-rm -rf server/*
-
-# write dockerfile
-echo $SERVER_DOCKERFILE > server/Dockerfile
-
-cd server
-
-# create virtual environment
-python -m venv venv
-
-# activate virtualenv
-source venv/bin/activate
-
-# install deps (graphene is optional)
-pip install \
-  django \
-  graphene-django \
-  django-filter \
-  django-environ \
-  django-cors-headers \
-  psycopg2
+./init.sh
 ```
 
-### React initialization
+### Allow Hosts
 
-```sh
-# save dockerfile contents
-WEBAPP_DOCKERFILE=$(cat webapp/Dockerfile)
+##### server/settings.py
 
-# start clean
-rm -rf webapp/*
-
-# create react app
-npx create-react-app ./webapp
-
-# write dockerfile
-echo $WEBAPP_DOCKERFILE > webapp/Dockerfile
+```py
+INSTALLED_APPS = [
+    ...
+    'corsheaders',
+    ...
+]
 ```
 
-### Build
+> Remember to place `corsheaders.middleware.CorsMiddleware` **BEFORE** `CommonMiddleware`!
+
+```py
+MIDDLEWARE = [
+    ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...
+]
+```
+
+```py
+ALLOWED_HOSTS = ['localhost']
+```
+
+### Set PostGIS connector
+
+##### server/settings.py
+
+```py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'USER': 'postgres',
+        'NAME': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}
+```
+
+## Building and running
 
 ```sh
 docker-compose build

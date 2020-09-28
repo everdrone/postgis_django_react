@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vm%*64t8j3w)h4=ttjv49(u#z6ri&ib4lteo2xkjkdeyf#nwc2'
+SECRET_KEY = 'e=+%vgey@c6qzq8@%=*gycwmzpox!eh975dqi5n0v1j3@tmd1h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'app'
 ]
 
 MIDDLEWARE = [
@@ -125,7 +124,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-CORS_ALLOWED_ORIGINS = [
-    "http://webapp:3000",
-]
