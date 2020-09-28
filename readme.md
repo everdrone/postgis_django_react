@@ -1,4 +1,4 @@
-# PostgreSQL + Django + React
+# PostGIS + Django GDAL + React
 
 ## Initialize boilerplate
 
