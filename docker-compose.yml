@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: postgis/postgis:13-3.0-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  server:
+    build: server
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./server:/app
+      - node_modules:/app/node_modules
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+  webapp:
+    build: webapp
+    command: npm run start
+    stdin_open: true
+    volumes:
+      - ./webapp:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
+  node_modules:
+# docker exec docker_server_1 python manage.py migrate
